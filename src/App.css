@@ -1,5 +1,10 @@
 body {
   font-family: "Open Sans", sans-serif;
+  background-image: linear-gradient(#CEC8FF, rgb(201, 206, 226), rgba(0, 0, 255, 0.61));
+}
+
+.card-body {
+  background-image: linear-gradient(#CEC8FF, white);
 }
 
 h1, h2, h3, .card-body>h5 {
