@@ -1,6 +1,6 @@
 body {
   font-family: "Open Sans", sans-serif;
-  background-image: linear-gradient(#CEC8FF, rgb(201, 206, 226), rgba(0, 0, 255, 0.61));
+  background-image: linear-gradient(rgba(0, 0, 255, 0.61), rgb(201, 206, 226), #CEC8FF);
 }
 
 .card-body {
@@ -27,7 +27,7 @@ h2 {
 }
 
 .site-footer {
-  background-image: linear-gradient(#CEC8FF, white);
+  background-image: linear-gradient(#aca3ee, white);
   padding: 20px 0;
 }
 
