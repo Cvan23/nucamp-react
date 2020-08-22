@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, Input, Label, Collapse } from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { LocalForm, Control } from 'react-redux-form';
+import { LocalForm, Control, Errors } from 'react-redux-form';
 
+const maxLength = len => val => !val || (val.length <= len);
+const minLength = len => val => val && (val.length >= len);
 
   function RenderCampsite({campsite}) {
     return (
@@ -65,9 +67,7 @@ import { LocalForm, Control } from 'react-redux-form';
       super(props);
 
       this.state = {
-        rating: false,
-        author: '',
-        text: ''
+        isModalOpen: false
       };
 
       this.toggleModal = this.toggleModal.bind(this);
@@ -80,10 +80,10 @@ import { LocalForm, Control } from 'react-redux-form';
       });
   }
 
-  handleSubmit(values) {
-    console.log("Current state is: " + JSON.stringify(values));
-    alert("Current state is: " + JSON.stringify(values));
-}
+    handleSubmit(values) {
+      console.log("Current state is: " + JSON.stringify(values));
+      alert("Current state is: " + JSON.stringify(values));
+    }
 
 
     render() {
@@ -96,9 +96,9 @@ import { LocalForm, Control } from 'react-redux-form';
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
               <ModalHeader toggle={this.toggleModal}>Submit Comment</ModalHeader>
               <ModalBody>
+              <LocalForm  onSubmit={values => this.handleSubmit(values)}>
                 <div className="form-group">
-                  <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                    <Label htmlFor="rating" md={2}>Rating</Label>
+                  <Label htmlFor="rating" md={2}>Rating</Label>
                     <Control.select model=".rating" id="rating" type="select">
                       <option value="true">1</option>
                       <option value="false">2</option>
@@ -106,29 +106,39 @@ import { LocalForm, Control } from 'react-redux-form';
                       <option value="false">4</option>
                       <option value="false">5</option>
                     </Control.select>
-                  </LocalForm>
                 </div>
                 <div className="form-group">
-                  <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                    <Label htmlFor="author" md={2}>Your Name</Label>
+                    <Label  htmlFor="author" md={2}>Your Name</Label>
                     <Control.text model=".author" id="author"
                       placeholder="Your Name"
                       className="form-control"
-                  />
-                  </LocalForm>
-                </div>
-                <div className="form-group">
-                  <LocalForm onSubmit={values => this.handleSubmit(values)}>
-                    <Label htmlFor="text" md={2}>Comment</Label>
+                      validators={{
+                        minLength: minLength(2),
+                        maxLength: maxLength(15)
+                      }}
+                    />
+                    <Errors show="touched"
+                      className="text-danger"
+                      model=".author"
+                      component="div"
+                      messages={{
+                        minLength: 'Must be at least 2 characters!',
+                        maxLength: 'Must be less than 15 characters!'
+                  
+                      }}
+                    />
+                 </div>
+                 <div className="form-group">
+                  <Label  htmlFor="text" md={2}>Comment</Label>
                     <Control.textarea model=".text" id="text"
                       placeholder="Comment"
                       className="form-control"
                   />
-                  </LocalForm>
-                </div>
-                <div className="form-group">
-                  <Button type="submit" value="submit" color="primary">Submit</Button>
-                </div>
+                  </div>
+                  <div className="form-group">
+                    <Button onClick={this.toggleModal} type="submit" value="submit" color="primary">Submit</Button>
+                  </div>
+                </LocalForm>
               </ModalBody>
             </Modal>
           </React.Fragment>
