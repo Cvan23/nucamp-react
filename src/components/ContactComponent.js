@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, Button, Label, Col, Row } from 'reactstrap'
 import { Control, Form, Errors, actions } from 'react-redux-form';  
 import { Link } from 'react-router-dom';
 
+
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
 const minLength = len => val => val && (val.length >= len);
@@ -208,7 +209,7 @@ class Contact extends Component {
                             </Row>
                             <Row className="form-group">
                                 <Col md={{size: 10, offset: 2}}>
-                                    <Button type="submit" color="primary">
+                                    <Button type="submit" color="" className="sm">
                                         Send Feedback
                                     </Button>
                                 </Col>
