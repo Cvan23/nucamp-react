@@ -71,8 +71,12 @@ h2 {
 button {
   color: #5637DD;
   background-color: #aca3ee;
+}
+
+button:hover {
   transition: all 0.5s ease-out;
-  
+  color: #f3daf7;
+  background-color: #60106B;
 }
 
 .card .card {

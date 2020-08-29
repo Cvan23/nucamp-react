@@ -3,7 +3,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 import { FadeTransform } from 'react-animation-components';
-import { Spring, useSpring, animated } from 'react-spring';
+import { useSpring, animated } from 'react-spring';
 
 
 const calc = (x, y) => [-(y - window.innerHeight / 2) / 20, (x - window.innerWidth / 3) / 10, 1.1]
@@ -24,18 +24,15 @@ function RenderCard({item, isLoading, errMess}) {
             transformProps={{
                 exitTransform: 'scale(0.5) translateY(50%)'
             }}>
-                
-                <animated.div
-                class="card"
-                onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
-                onMouseLeave={() => set({ xys: [0, 0, 1] })}
-                style={{ transform: props.xys.interpolate(trans) }}
-                >
+            <animated.div
+            class="card"
+            onMouseMove={({ clientX: x, clientY: y }) => set({ xys: calc(x, y) })}
+            onMouseLeave={() => set({ xys: [0, 0, 1] })}
+            style={{ transform: props.xys.interpolate(trans) }}
+            >
             <Card className="card">
-            
                 <CardImg  src={baseUrl + item.image} alt={item.name} />
                 <CardBody>
-                
                     <CardTitle>{item.name}</CardTitle>
                     <CardText>{item.description}</CardText>
                 </CardBody>
@@ -64,7 +61,11 @@ function Home(props) {
                     />
                 </div>
                 <div className="col-md m-1">
-                    <RenderCard item={props.partner} />
+                    <RenderCard
+                        item={props.partner}
+                        isLoading={props.partnerLoading}
+                        errMess={props.partnerErrMess}
+                    />
                 </div>
             </div>
         </div>
