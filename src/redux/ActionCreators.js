@@ -193,5 +193,44 @@ export const addPartners = partners => ({
 });
 
 
+    // Action Creator for Post Feedback
+    export const postFeedback = (feedback) => () => {
+        // This line is to make a copy of feedback object in order to add date property
+        const extensibleFeedback = { ...feedback };
+        extensibleFeedback.date = new Date().toISOString();
+        return fetch(baseUrl + "feedback", {
+          method: "POST",
+          body: JSON.stringify(extensibleFeedback),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then(
+            (response) => {
+              if (response.ok) {
+                return response;
+              } else {
+                const error = new Error(
+                  `Error ${response.status}: ${response.statusText}`
+                );
+                error.response = response;
+                throw error;
+              }
+            },
+            (error) => {
+              throw error;
+            }
+          )
+          .then((response) => response.json())
+          .then((response) => {
+            console.log("Feedback: ", response);
+            alert("Thank you for your feedback!\n" + JSON.stringify(response));
+          })
+          .catch((error) => {
+            console.log("Feedback: ", error.message);
+            alert("Your feedback could not be posted\nError: " + error.message);
+          });
+        }
+    
 
 

@@ -30,13 +30,13 @@ function RenderCard({item, isLoading, errMess}) {
             onMouseLeave={() => set({ xys: [0, 0, 1] })}
             style={{ transform: props.xys.interpolate(trans) }}
             >
-            <Card className="card">
-                <CardImg  src={baseUrl + item.image} alt={item.name} />
-                <CardBody>
-                    <CardTitle>{item.name}</CardTitle>
-                    <CardText>{item.description}</CardText>
-                </CardBody>
-            </Card>
+                <Card className="card">
+                    <CardImg  src={baseUrl + item.image} alt={item.name} />
+                    <CardBody>
+                        <CardTitle>{item.name}</CardTitle>
+                        <CardText>{item.description}</CardText>
+                    </CardBody>
+                </Card>
             </animated.div>
         </FadeTransform>
     );

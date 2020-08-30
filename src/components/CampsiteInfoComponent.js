@@ -143,11 +143,11 @@ const minLength = len => val => val && (val.length >= len);
                 <div className="form-group">
                   <Label htmlFor="rating" md={2}>Rating</Label>
                     <Control.select model=".rating" id="rating" type="select">
-                      <option value="true">1</option>
-                      <option value="false">2</option>
-                      <option value="false">3</option>
-                      <option value="false">4</option>
-                      <option value="false">5</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
                     </Control.select>
                 </div>
                 <div className="form-group">
